@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EFORJA — Catálogo de Peças Afftemarket</title>
+  <meta name="description" content="Catálogo de peças forjadas: componentes automotivos, agrícolas e linha amarela.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a href="#/" class="brand" aria-label="EFORJA — início">
+        <img
+          src="img/logos/EFORJA.jfif"
+          alt="EFORJA"
+          class="brand-logo"
+          onerror="this.style.display='none';document.getElementById('brandFallback').style.display='inline';">
+        <span id="brandFallback" class="brand-fallback">EFORJA</span>
+      </a>
+
+      <div class="brand-divider" aria-hidden="true"></div>
+      <h1 class="brand-tagline">Forjado para confiar, criado para durar</h1>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#/">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#/contato">Contato</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+      </button>
+      <a href="#/contato" class="btn-primary header-cta">Solicitar Cotação</a>
+    </div>
+  </header>
+
+  <main id="app">
+
+    <!-- ============ HERO / SEGMENTOS ============ -->
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Catálogo técnico</p>
+        <h1>Peças forjadas para os segmentos que movem a indústria</h1>
+        <p class="hero-sub">
+          Componentes aftermarket de qualidade. Atendemos setores automotivo,
+          agrícola e linha amarela com rastreabilidade e conformidade IATF 16949.
+        </p>
+      </div>
+    </section>
+
+    <section class="segments" id="segmentos">
+      <div class="container segments-grid" id="segmentsGrid">
+        <!-- Renderizado pelo JS -->
+      </div>
+    </section>
+
+    <!-- ============ CATÁLOGO ============ -->
+    <section class="catalogo" id="catalogo">
+      <div class="container">
+        <div class="catalogo-head">
+          <div>
+            <p class="eyebrow">Catálogo técnico</p>
+            <h2>Peças disponíveis</h2>
+          </div>
+          <p class="results-count" id="resultsCount"></p>
+        </div>
+
+        <div class="filters">
+          <div class="filter-field filter-search">
+            <label for="searchInput">Buscar peça</label>
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Código, descrição, veículo ou equivalência..."
+              autocomplete="off">
+          </div>
+
+          <div class="filter-field">
+            <label for="linhaFilter">Linha</label>
+            <select id="linhaFilter">
+              <option value="">Todas as linhas</option>
+              <option value="Automotivo">Automotivo</option>
+              <option value="Agrícola">Agrícola</option>
+              <option value="Linha Amarela">Linha Amarela</option>
+            </select>
+          </div>
+
+          <div class="filter-field">
+            <label for="marcaFilter">Marca</label>
+            <select id="marcaFilter">
+              <option value="">Todas as marcas</option>
+            </select>
+          </div>
+
+          <button class="btn-outline" id="clearFilters">Limpar</button>
+        </div>
+
+        <div class="pieces-grid" id="piecesGrid"></div>
+        <p class="empty-state" id="emptyState" hidden>
+          Nenhuma peça encontrada com esses filtros. Ajuste a busca ou limpe os filtros.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ RODAPÉ ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <img
+          src="img/logos/eletroforja.png"
+          alt="EFORJA" class="footer-logo"
+          onerror="this.style.display='none';">
+        <div>
+          <span class="footer-brand-name">ELETROFORJA</span>
+          <span class="footer-brand-tagline">Forjado para confiar, criado para durar</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Linhas de produto</h4>
+        <ul>
+          <li><a href="#catalogo" data-linha="Automotivo">Automotivo</a></li>
+          <li><a href="#catalogo" data-linha="Agrícola">Agrícola</a></li>
+          <li><a href="#catalogo" data-linha="Linha Amarela">Linha Amarela</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Qualidade</h4>
+        <ul>
+          <li>IATF 16949:2016</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul>
+          <li>(51) 3778.4500</li>
+          <li>vendas@eletroforja.com.br</li>
+          <li>Av. Fernando Ferrari, 2060<br>Cachoeirinha/RS</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Eletroforja — Catálogo de affermarket.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ MODAL DE PEÇA ============ -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" role="document">
+      <div class="modal-head">
+        <div>
+          <span class="modal-eyebrow" id="modalLinha"></span>
+          <h2 id="modalTitle"></h2>
+        </div>
+        <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-foot">
+        <a class="btn-primary" id="modalWhats" target="_blank" rel="noopener">Solicitar cotação</a>
+        <button class="btn-outline" id="modalFechar">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-box" id="toastBox"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
