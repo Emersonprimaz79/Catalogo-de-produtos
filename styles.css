@@ -1,5 +1,5 @@
 /* ==========================================================
-   EFORJA — Catálogo de Peças Forjadas
+   EFORJA — Catálogo de Peças Aftermarket
    styles.css
    ========================================================== */
 
@@ -20,7 +20,6 @@
   --shadow-sm: 0 1px 2px rgba(28,34,38,.06);
   --shadow-md: 0 6px 20px rgba(28,34,38,.10);
   --shadow-lg: 0 20px 50px rgba(0,0,0,.30);
-
   --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "SF Mono", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
 }
@@ -28,9 +27,16 @@
 /* ---------- 2. RESET ---------- */
 * { box-sizing: border-box; }
 
-html, body { margin: 0; padding: 0; }
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: var(--font-base);
   color: var(--ef-body);
   background: var(--ef-bg);
@@ -39,11 +45,8 @@ body {
 }
 
 img { max-width: 100%; display: block; }
-
 a { color: inherit; text-decoration: none; }
-
 h1, h2, h3, h4 { color: var(--ef-title); margin: 0; line-height: 1.25; }
-
 button { font-family: inherit; }
 
 .container {
@@ -93,14 +96,6 @@ button { font-family: inherit; }
   color: var(--ef-fundo);
 }
 
-.brand-name {
-  font-weight: 800;
-  letter-spacing: .06em;
-  color: var(--ef-fundo);
-  font-size: 1.05rem;
-  text-transform: uppercase;
-}
-
 .brand-divider {
   width: 1px;
   height: 34px;
@@ -110,13 +105,14 @@ button { font-family: inherit; }
 
 .brand-tagline {
   margin: 0;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .08em;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .04em;
   text-transform: uppercase;
   color: #2A3238;
-  max-width: 210px;
-  line-height: 1.4;
+  max-width: none;
+  white-space: nowrap;
+  line-height: 1.35;
 }
 
 .main-nav {
@@ -151,7 +147,6 @@ button { font-family: inherit; }
   cursor: pointer;
   transition: background .2s;
 }
-
 .btn-primary:hover { background: #143855; }
 
 .btn-outline {
@@ -165,7 +160,6 @@ button { font-family: inherit; }
   cursor: pointer;
   transition: background .2s, color .2s;
 }
-
 .btn-outline:hover { background: var(--ef-blue-soft); }
 
 .header-cta { flex-shrink: 0; }
@@ -295,6 +289,75 @@ button { font-family: inherit; }
   margin: 0;
 }
 
+/* ---------- 5.1 MODAL SOBRE ---------- */
+.modal-sobre { max-width: 700px; }
+
+.modal-body-sobre p {
+  font-size: .93rem;
+  line-height: 1.75;
+  color: var(--ef-body);
+  margin: 0 0 16px;
+}
+
+.modal-body-sobre p:last-of-type { margin-bottom: 0; }
+
+.modal-body-sobre strong {
+  color: var(--ef-fundo);
+  font-weight: 700;
+}
+
+/* ---------- 5.2 MODAL CONTATO ---------- */
+.modal-contato { max-width: 480px; }
+
+.modal-body-contato {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contato-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contato-label {
+  font-size: .66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ef-muted);
+}
+
+.contato-valor {
+  font-size: .95rem;
+  color: var(--ef-title);
+  line-height: 1.6;
+}
+
+a.contato-valor:hover {
+  color: var(--ef-blue);
+  text-decoration: underline;
+}
+
+.contato-whats {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1EBE5D;
+  transition: color .2s;
+}
+
+.contato-whats:hover { color: #128C7E; }
+
+.contato-whats svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
 /* ---------- 6. CATÁLOGO / FILTROS ---------- */
 .catalogo { padding: 56px 0 72px; }
 
@@ -381,7 +444,7 @@ button { font-family: inherit; }
   border-color: #C6CFD5;
 }
 
-/* --- Galeria / carrossel --- */
+/* --- Galeria / carrossel manual --- */
 .piece-gallery {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -394,10 +457,9 @@ button { font-family: inherit; }
   display: flex;
   width: 300%;
   height: 100%;
-  animation: gallerySlide 9s ease-in-out infinite;
+  transition: transform .35s ease;
+  transform: translateX(0);
 }
-
-.piece-gallery:hover .gallery-track { animation-play-state: paused; }
 
 .gallery-slide {
   width: 33.3333%;
@@ -438,32 +500,32 @@ button { font-family: inherit; }
   color: #B4BDC3;
 }
 
-@keyframes gallerySlide {
-  0%, 22%   { transform: translateX(0); }
-  33%, 55%  { transform: translateX(-33.3333%); }
-  66%, 88%  { transform: translateX(-66.6666%); }
-  100%      { transform: translateX(0); }
-}
-
 .gallery-dots {
   position: absolute;
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 5px;
+  gap: 6px;
   z-index: 2;
 }
 
-.gallery-dots span {
-  width: 5px;
-  height: 5px;
+.gallery-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
   border-radius: 50%;
   background: rgba(255,255,255,.55);
   box-shadow: 0 0 0 1px rgba(28,34,38,.15);
+  cursor: pointer;
+  transition: background .2s, transform .2s;
 }
 
-.gallery-dots span.active-dot { background: var(--ef-orange); }
+.gallery-dots button.active-dot {
+  background: var(--ef-orange);
+  transform: scale(1.15);
+}
 
 /* --- Conteúdo do card --- */
 .piece-body {
@@ -511,7 +573,7 @@ button { font-family: inherit; }
   border: 1px solid var(--ef-line);
 }
 
-/* --- Blocos de chips (mesma fonte unificada) --- */
+/* --- Blocos de chips --- */
 .chip-block { display: flex; flex-direction: column; gap: 7px; }
 
 .chip-label {
@@ -738,18 +800,21 @@ button { font-family: inherit; }
 .toast-box.show { opacity: 1; }
 
 /* ---------- 11. RESPONSIVO ---------- */
+
+@media (max-width: 1080px) {
+  .brand-tagline { display: none; }
+  .brand-divider { display: none; }
+}
+
 @media (max-width: 980px) {
   .segments-grid { grid-template-columns: 1fr 1fr; }
   .pieces-grid { grid-template-columns: repeat(2, 1fr); }
   .filters { grid-template-columns: 1fr 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .brand-tagline { display: none; }
-  .brand-divider { display: none; }
 }
 
 @media (max-width: 720px) {
   .header-inner { min-height: 70px; }
-
   .brand-logo { height: 44px; }
 
   .nav-toggle { display: flex; margin-left: auto; }
@@ -782,10 +847,11 @@ button { font-family: inherit; }
   .footer-grid { grid-template-columns: 1fr; }
 
   .hero { padding: 40px 0 34px; }
-
   .catalogo { padding: 40px 0 52px; }
-
   .catalogo-head { flex-direction: column; align-items: flex-start; }
+
+  .modal-body-sobre p { font-size: .88rem; }
+  .contato-whats { font-size: 1rem; }
 }
 
 /* ---------- 12. ACESSIBILIDADE ---------- */
